@@ -1,4 +1,11 @@
-/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /tmp/tmp.ZXr8BVTQDJ
+"D:\Program Files\JetBrains\CLion 2020.1.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" I:\software\c\market
+-- The C compiler identification is GNU 8.1.0
+-- Check for working C compiler: D:/MinGW/mingw64/bin/gcc.exe
+-- Check for working C compiler: D:/MinGW/mingw64/bin/gcc.exe -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /tmp/tmp.ZXr8BVTQDJ/cmake-build-debug
+-- Build files have been written to: I:/software/c/market/cmake-build-debug

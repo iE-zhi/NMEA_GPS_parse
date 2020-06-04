@@ -1,3 +1,4 @@
-ToolSet: 1.0 (remote)Options: 
+ToolSet: w64 6.0 (local)@D:\MinGW\mingw64
+Options: 
 
 Options:

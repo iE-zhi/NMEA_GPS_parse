@@ -11,11 +11,12 @@ int main()
                         "$GPVTG,89.68,T,,M,0.00,N,0.0,K*5F\r\n"
                         "$GPGLL,4250.5589,S,14718.5084,E,092204.999,A*2D\r\n";
     gps = gps_data_parse(gps_data);
+    printf("----------GGA DATA----------\n");
     printf("utc:%s\n", gps.gga_data.utc);
     printf("lat:%f\n", gps.gga_data.lat);
     printf("lat_dir:%c\n", gps.gga_data.lat_dir);
     printf("lon:%f\n", gps.gga_data.lon);
-    printf("lon_dir:%c", gps.gga_data.lon_dir);
+    printf("lon_dir:%c\n", gps.gga_data.lon_dir);
     printf("quality:%d\n", gps.gga_data.quality);
     printf("sats:%d\n", gps.gga_data.sats);
     printf("hdop:%f\n", gps.gga_data.hdop);
@@ -23,6 +24,15 @@ int main()
     printf("undulation:%f\n", gps.gga_data.undulation);
     printf("age:%d\n", gps.gga_data.age);
     printf("stn_ID:%d\n", gps.gga_data.stn_ID);
+
+    printf("----------GLL DATA----------\n");
+    printf("utc:%s\n", gps.gll_data.utc);
+    printf("lat:%f\n", gps.gll_data.lat);
+    printf("lat_dir:%c\n", gps.gll_data.lat_dir);
+    printf("lon:%f\n", gps.gll_data.lon);
+    printf("lon_dir:%c\n", gps.gll_data.lon_dir);
+    printf("data_status:%c\n", gps.gll_data.data_status);
+
 
     return 0;
 }

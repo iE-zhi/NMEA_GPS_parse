@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/market.dir/main.c.o"
-  "CMakeFiles/market.dir/gps.c.o"
+  "CMakeFiles/market.dir/gps.c.obj"
+  "CMakeFiles/market.dir/main.c.obj"
+  "libmarket.dll.a"
+  "market.exe"
+  "market.exe.manifest"
   "market.pdb"
-  "market"
 )
 
 # Per-language clean rules from dependency scanning.

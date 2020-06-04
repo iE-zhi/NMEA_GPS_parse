@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,7 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/tmp/tmp.ZXr8BVTQDJ/main.c
+I:/software/c/market/gps.c
+gps.h
+I:/software/c/market/gps.h
+
+I:/software/c/market/gps.h
 stdio.h
+-
+stdlib.h
+-
+string.h
 -
 

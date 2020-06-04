@@ -10,12 +10,12 @@
 #include <string.h>
 
 #define float double
-#define PRE_GGA     "GPGGA"
-#define PRE_GLL     "GPGGA"
-#define PRE_GSA     "GPGSA"
-#define PRE_GSV     "GPGSV"
-#define PRE_RMC     "GPRMC"
-#define PRE_VTG     "GPVTG"
+#define PRE_GGA     "$GPGGA"
+#define PRE_GLL     "$GPGLL"
+#define PRE_GSA     "$GPGSA"
+#define PRE_GSV     "$GPGSV"
+#define PRE_RMC     "$GPRMC"
+#define PRE_VTG     "$GPVTG"
 
 // GGA字段结构体（GPS定位数据）
 typedef struct
@@ -41,7 +41,7 @@ typedef struct
     char lat_dir;            // 纬度半球，N或S
     float lon;               // 经度，格式为dddmm.mmmm
     char lon_dir;            // 经度半球，E或W
-    char utc[10];            // UTC时间，格式为hhmmss.ss
+    char utc[11];            // UTC时间，格式为hhmmss.sss
     char data_status;        // 状态标志位，A：有效，V无效
 }GLL;
 
