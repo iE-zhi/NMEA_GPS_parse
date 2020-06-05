@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="I:/software/c/market/cmake-build-debug"/>
+				<Option working_dir="E:/software/c/market/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="market">
-				<Option output="I:/software/c/market/cmake-build-debug/market.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="I:/software/c/market/cmake-build-debug"/>
+				<Option output="E:/software/c/market/cmake-build-debug/market.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/software/c/market/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -29,15 +29,15 @@
 					<Add directory="D:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 market"/>
-					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 market"/>
+					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="market/fast">
-				<Option output="I:/software/c/market/cmake-build-debug/market.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="I:/software/c/market/cmake-build-debug"/>
+				<Option output="E:/software/c/market/cmake-build-debug/market.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="E:/software/c/market/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -47,43 +47,43 @@
 					<Add directory="D:/MinGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 market/fast"/>
-					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 market/fast"/>
+					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="I:/software/c/market/cmake-build-debug"/>
+				<Option working_dir="E:/software/c/market/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="I:/software/c/market/cmake-build-debug"/>
+				<Option working_dir="E:/software/c/market/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;I:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/MinGW/mingw64/bin/mingw32-make.exe -f &quot;E:/software/c/market/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="I:/software/c/market/gps.c">
+		<Unit filename="E:/software/c/market/gps.c">
 			<Option target="market"/>
 		</Unit>
-		<Unit filename="I:/software/c/market/gps.h">
+		<Unit filename="E:/software/c/market/gps.h">
 			<Option target="market"/>
 		</Unit>
-		<Unit filename="I:/software/c/market/main.c">
+		<Unit filename="E:/software/c/market/main.c">
 			<Option target="market"/>
 		</Unit>
-		<Unit filename="I:/software/c/market/CMakeLists.txt">
+		<Unit filename="E:/software/c/market/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
