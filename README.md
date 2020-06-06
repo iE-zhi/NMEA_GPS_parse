@@ -50,7 +50,7 @@ GPS数据解析开源项目。
 ## 注意事项
 1.为确保您的正常使用，`gps.h`文件中的<语句解析控制>宏定义块应至少保持一项为1。
 
-2.若是使用UTC解析，请确保`ENABLE_RMC`和`ENABLE_UTC`语句宏定义都处于 1状态。因为，UTC在解析过程中，会使用到RMC语句中的utc和time两个字段。
+2.若是使用UTC解析，请确保`ENABLE_RMC`和`ENABLE_UTC`宏定义都处于 1状态。因为，UTC在解析过程中，会使用到RMC语句中的utc和time两个字段。
 
 3.若是用到GSA和GSV两个语句，在使用完成后，请调用`free(gps.gsa_data.gsa_prn)`和`free(gps.gXgsv_data.sat_info)`来释放内存。因为，这两个语句中的卫星数据个数不确定，所以需要动态分配内存。
 
