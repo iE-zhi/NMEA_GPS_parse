@@ -6,15 +6,21 @@
 
 #IncludeRegexTransform: 
 
-E:/software/c/market/gps.c
+I:/software/c/market/gps.c
 gps.h
-E:/software/c/market/gps.h
+I:/software/c/market/gps.h
 
-E:/software/c/market/gps.h
+I:/software/c/market/gps.h
 stdio.h
 -
 stdlib.h
 -
 string.h
 -
+
+I:/software/c/market/main.c
+stdio.h
+-
+gps.h
+I:/software/c/market/gps.h
 

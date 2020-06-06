@@ -43,10 +43,10 @@ RM = "D:\Program Files\JetBrains\CLion 2020.1.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\software\c\market
+CMAKE_SOURCE_DIR = I:\software\c\market
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\software\c\market\cmake-build-debug
+CMAKE_BINARY_DIR = I:\software\c\market\cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -73,14 +73,14 @@ clean: CMakeFiles/market.dir/clean
 CMakeFiles/market.dir/all:
 	$(MAKE) -f CMakeFiles\market.dir\build.make CMakeFiles/market.dir/depend
 	$(MAKE) -f CMakeFiles\market.dir\build.make CMakeFiles/market.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=E:\software\c\market\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target market"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=I:\software\c\market\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target market"
 .PHONY : CMakeFiles/market.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/market.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\software\c\market\cmake-build-debug\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start I:\software\c\market\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/market.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\software\c\market\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start I:\software\c\market\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/market.dir/rule
 
 # Convenience name for target.

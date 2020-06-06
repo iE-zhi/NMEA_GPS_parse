@@ -47,6 +47,7 @@ static int strstr_cnt(char *str, char *substr)
     return count;
 }
 
+#if ENABLE_GGA
 // GGA数据解析
 static GGA gga_data_parse(char *gga_data)
 {
@@ -55,8 +56,6 @@ static GGA gga_data_parse(char *gga_data)
     char *p;
     char *end;
     char *s = strdup(gga_data);
-
-    printf("gga:%s\n", gga_data);
 
     p = strsplit(&s, ",");
     while (p)
@@ -112,7 +111,9 @@ static GGA gga_data_parse(char *gga_data)
     free(s);
     return gga;
 }
+#endif
 
+#if ENABLE_GLL
 // GLL数据解析
 static GLL gll_data_parse(char *gll_data)
 {
@@ -120,8 +121,6 @@ static GLL gll_data_parse(char *gll_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(gll_data);
-
-    printf("gll:%s\n", gll_data);
 
     p = strsplit(&s, ",");
     while (p)
@@ -155,7 +154,9 @@ static GLL gll_data_parse(char *gll_data)
     free(s);
     return gll;
 }
+#endif
 
+#if ENABLE_GSA
 // 得到GSA数据中的信道信息
 static GSA_PRN *get_prn_data(char *gps_data)
 {
@@ -171,8 +172,8 @@ static GSA_PRN *get_prn_data(char *gps_data)
     // 统计GSA字段的个数
     gsa_count = strstr_cnt(gps_data, PRE_GSA);
 
-    gsa_prn = (GSA_PRN *)malloc(sizeof(GSA_PRN) * gsa_count + 1);
-    memset(gsa_prn, 0, sizeof(GSA_PRN) * gsa_count + 1);
+    gsa_prn = (GSA_PRN *)malloc(sizeof(GSA_PRN) * (gsa_count * 12 + 1));
+    memset(gsa_prn, 0, sizeof(GSA_PRN) * (gsa_count * 12 + 1));
     sentens = strtok(gps_data, "\r\n");
     while (sentens)
     {
@@ -214,8 +215,6 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
     char *s = strdup(gsa_data);
     char *alldata = strdup(gpsdata);
 
-    printf("gsa:%s\n", gsa_data);
-
     p = strsplit(&s, ",");
     while (p)
     {
@@ -227,8 +226,8 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
             case 2:   // mode_123
                 gsa.mode_123 = p[0];
                 break;
-            case 3:   // prn1
-                gsa.gsaPrn = get_prn_data(alldata);
+            case 3:   // prn
+                gsa.gsa_prn = get_prn_data(alldata);
             case 15:  // pdop
                 gsa.pdop = strtod(p, NULL);
                 break;
@@ -250,7 +249,9 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
     free(s);
     return gsa;
 }
+#endif
 
+#if ENABLE_RMC
 // RMC数据解析
 static RMC rmc_data_parse(char *rmc_data)
 {
@@ -258,8 +259,6 @@ static RMC rmc_data_parse(char *rmc_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(rmc_data);
-
-    printf("rmc:%s\n", rmc_data);
 
     p = strsplit(&s, ",");
     while (p)
@@ -311,7 +310,9 @@ static RMC rmc_data_parse(char *rmc_data)
     free(s);
     return rmc;
 }
+#endif
 
+#if ENABLE_VTG
 // VTG数据解析
 static VTG vtg_data_parse(char *vtg_data)
 {
@@ -319,8 +320,6 @@ static VTG vtg_data_parse(char *vtg_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(vtg_data);
-
-    printf("vtg:%s\n", vtg_data);
 
     p = strsplit(&s, ",");
     while (p)
@@ -348,7 +347,9 @@ static VTG vtg_data_parse(char *vtg_data)
     free(s);
     return vtg;
 }
+#endif
 
+#if ENABLE_GSV
 /*
  * function:  获取GSV字段中的GPS信息
  * gps_data:  最原始的GPS字符串
@@ -357,6 +358,7 @@ static VTG vtg_data_parse(char *vtg_data)
 */
 static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
 {
+    SAT_INFO *sats_info;
     unsigned char times = 0;
     unsigned char msgs = 0;
     unsigned char msg = 0;
@@ -365,7 +367,6 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
     char *p;
     char *s;
     char *sentens;
-    SAT_INFO *sats_info;
 
     sats_info = (SAT_INFO *)malloc(sizeof(SAT_INFO) * (sats+1));
     memset(sats_info, 0, sizeof(SAT_INFO) * (sats+1));
@@ -423,8 +424,6 @@ static GSV gsv_data_parse(char *gsv_data, char *gps_data, char *prefix)
     char *s = strdup(gsv_data);
     char *src_data = strdup(gps_data);
 
-    printf("gsv:%s\n", gsv_data);
-
     p = strsplit(&s, ",");
     while (p)
     {
@@ -449,8 +448,9 @@ static GSV gsv_data_parse(char *gsv_data, char *gps_data, char *prefix)
     free(s);
     return gsv;
 }
+#endif
 
-
+#if ENABLE_UTC
 // UTC数据解析
 static UTC utc_parse(char *date, char *time)
 {
@@ -470,41 +470,69 @@ static UTC utc_parse(char *date, char *time)
 
     return utc_data;
 }
+#endif
 
 // 解析全部的GPS数据
 GPS gps_data_parse(char* gps_src)
 {
     GPS gps_all;
-    SAT_INFO default_sat_info_data = {0,0,0,0};
-    GSA_PRN default_gsa_prn_data = {0,0,0};
-    GGA default_gga_data = {"\0",0.0,'N',0.0,'S',0,0,0,0,0,0,0};
-    GLL default_gll_data = {0.0,'\0',0.0,'\0',"\0",'\0'};
-    GSA default_gsa_data = {'\0','\0',&default_gsa_prn_data,0.0,0.0,0.0};
-    RMC default_rmc_data = {"\0",'\0',0.0,'\0',0.0,'\0',0.0,0.0,"\0",0.0,'\0','\0'};
-    VTG default_vtg_data = {0.0,0.0,0.0,0.0};
-    GSV default_gsv_data = {0,0,0,&default_sat_info_data};
     char *str_buffer = strdup(gps_src);
 
+    // GGA数据解析
+#if ENABLE_GGA
+    GGA default_gga_data = {"\0",0.0,'N',0.0,'S',0,0,0,0,0,0,0};
+    gps_src = strdup(str_buffer);
     gps_all.gga_data = strstr(gps_src, PRE_GGA) ? gga_data_parse(strtok(strstr(gps_src, PRE_GGA), "\r\n")) : default_gga_data;
+#endif
+
+    // GLL数据解析
+#if ENABLE_GLL
+    GLL default_gll_data = {0.0,'\0',0.0,'\0',"\0",'\0'};
     gps_src = strdup(str_buffer);
     gps_all.gll_data = strstr(gps_src, PRE_GLL) ? gll_data_parse(strtok(strstr(gps_src, PRE_GLL), "\r\n")) : default_gll_data;
+#endif
+
+    // GSA数据解析
+#if ENABLE_GSA
+    GSA_PRN default_gsa_prn_data = {0,0,0};
+    GSA default_gsa_data = {'\0','\0',0.0,0.0,0.0,&default_gsa_prn_data};
     gps_src = strdup(str_buffer);
     gps_all.gsa_data = strstr(gps_src, PRE_GSA) ? gsa_data_parse(strtok(strstr(gps_src, PRE_GSA), "\r\n"), str_buffer) : default_gsa_data;
+#endif
+
+    // RMC数据解析
+#if ENABLE_RMC
+    RMC default_rmc_data = {"\0",'\0',0.0,'\0',0.0,'\0',0.0,0.0,"\0",0.0,'\0','\0'};
     gps_src = strdup(str_buffer);
     gps_all.rmc_data = strstr(gps_src, PRE_RMC) ? rmc_data_parse(strtok(strstr(gps_src, PRE_RMC), "\r\n")) : default_rmc_data;
+#endif
+
+    // VTG数据解析
+#if ENABLE_VTG
+    VTG default_vtg_data = {0.0,0.0,0.0,0.0};
     gps_src = strdup(str_buffer);
     gps_all.vtg_data = strstr(gps_src, PRE_VTG) ? vtg_data_parse(strtok(strstr(gps_src, PRE_VTG), "\r\n")) : default_vtg_data;
+#endif
 
+    // GSV数据解析
+#if ENABLE_GSV
+    SAT_INFO default_sat_info_data = {0,0,0,0};
+    GSV default_gsv_data = {0,0,0,&default_sat_info_data};
+    // GPGSV数据段解析
     gps_src = strdup(str_buffer);
     gps_all.gpgsv_data = strstr(gps_src, PRE_GPGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GPGSV), "\r\n"), str_buffer, PRE_GPGSV) : default_gsv_data;
-
+    // GNGSV数据段解析
     gps_src = strdup(str_buffer);
     gps_all.gngsv_data = strstr(gps_src, PRE_GNGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GNGSV), "\r\n"), str_buffer, PRE_GNGSV) : default_gsv_data;
-
+    // GLGSV数据段解析
     gps_src = strdup(str_buffer);
     gps_all.glgsv_data = strstr(gps_src, PRE_GLGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GLGSV), "\r\n"), str_buffer, PRE_GLGSV) : default_gsv_data;
+#endif
 
+    // UTC数据解析，UTC数据取自RMC段数据
+#if ENABLE_UTC && ENABLE_RMC
     gps_all.utc = utc_parse(gps_all.rmc_data.date, gps_all.rmc_data.utc);
+#endif
 
     free(str_buffer);
     free(gps_src);
