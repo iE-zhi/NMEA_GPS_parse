@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// 根据实际的数据修改前缀
+// 根据实际的数据修改ID
 #define PRE_GGA     "$GNGGA"
 #define PRE_GLL     "$GNGLL"
 #define PRE_GSA     "$GNGSA"
@@ -19,7 +19,7 @@
 #define PRE_RMC     "$GNRMC"
 #define PRE_VTG     "$GNVTG"
 
-// 字段解析控制 1：使能，0：禁用
+// 语句解析控制 1：使能，0：禁用
 #define ENABLE_GGA  1
 #define ENABLE_GLL  1
 #define ENABLE_GSA  1
