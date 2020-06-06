@@ -163,10 +163,10 @@ static GSA_PRN *get_prn_data(char *gps_data)
     GSA_PRN *gsa_prn;
     unsigned char times = 0;
     unsigned char i;
-    unsigned char sentens_index = 0;  // 累计找到gsa字段的个数
+    unsigned char sentences_index = 0;  // 累计找到gsa字段的个数
     char *p;
     char *s;
-    char *sentens;
+    char *sentences;
     int gsa_count;
 
     // 统计GSA字段的个数
@@ -174,13 +174,13 @@ static GSA_PRN *get_prn_data(char *gps_data)
 
     gsa_prn = (GSA_PRN *)malloc(sizeof(GSA_PRN) * (gsa_count * 12 + 1));
     memset(gsa_prn, 0, sizeof(GSA_PRN) * (gsa_count * 12 + 1));
-    sentens = strtok(gps_data, "\r\n");
-    while (sentens)
+    sentences = strtok(gps_data, "\r\n");
+    while (sentences)
     {
-        if (strstr(sentens, PRE_GSA))
+        if (strstr(sentences, PRE_GSA))
         {
-            sentens_index++;
-            s = strdup(sentens);
+            sentences_index++;
+            s = strdup(sentences);
             p = strsplit(&s, ",");
             while (p)
             {
@@ -189,9 +189,9 @@ static GSA_PRN *get_prn_data(char *gps_data)
                     for (i=0; i<12; i++)
                     {
                         p = strsplit(&s, ",");
-                        (gsa_prn+i+(sentens_index-1)*12)->total = (unsigned char)gsa_count * 12;
-                        (gsa_prn+i+(sentens_index-1)*12)->prn_ID = i + (sentens_index - 1) * 12;
-                        (gsa_prn+i+(sentens_index-1)*12)->prn = (unsigned char)strtol(p, NULL, 10);
+                        (gsa_prn+i+(sentences_index-1)*12)->total = (unsigned char)gsa_count * 12;
+                        (gsa_prn+i+(sentences_index-1)*12)->prn_ID = i + (sentences_index - 1) * 12;
+                        (gsa_prn+i+(sentences_index-1)*12)->prn = (unsigned char)strtol(p, NULL, 10);
                     }
                 }
                 p = strsplit(&s, ",");
@@ -199,7 +199,7 @@ static GSA_PRN *get_prn_data(char *gps_data)
             }
             times = 0;
         }
-        sentens = strtok(NULL, "\r\n");
+        sentences = strtok(NULL, "\r\n");
     }
     free(s);
     return gsa_prn;
@@ -366,16 +366,16 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
     unsigned char i;
     char *p;
     char *s;
-    char *sentens;
+    char *sentences;
 
     sats_info = (SAT_INFO *)malloc(sizeof(SAT_INFO) * (sats+1));
     memset(sats_info, 0, sizeof(SAT_INFO) * (sats+1));
-    sentens = strtok(gps_data, "\r\n");
-    while (sentens)
+    sentences = strtok(gps_data, "\r\n");
+    while (sentences)
     {
-        if (strstr(sentens, prefix))
+        if (strstr(sentences, prefix))
         {
-            s = strdup(sentens);
+            s = strdup(sentences);
             p = strsplit(&s, ",");
             while (p)
             {
@@ -409,7 +409,7 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
             }
             times = 0;
         }
-        sentens = strtok(NULL, "\r\n");
+        sentences = strtok(NULL, "\r\n");
     }
     free(s);
     return sats_info;
