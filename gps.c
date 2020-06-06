@@ -228,6 +228,7 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
                 break;
             case 3:   // prn
                 gsa.gsa_prn = get_prn_data(alldata);
+                break;
             case 15:  // pdop
                 gsa.pdop = strtod(p, NULL);
                 break;
