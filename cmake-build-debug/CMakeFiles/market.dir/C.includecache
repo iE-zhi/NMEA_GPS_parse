@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-I:/software/c/market/gps.c
-gps.h
-I:/software/c/market/gps.h
-
 I:/software/c/market/gps.h
 stdio.h
 -
