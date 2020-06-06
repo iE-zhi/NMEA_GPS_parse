@@ -55,7 +55,7 @@ int main()
     printf("pdop:%f\n", gps.gsa_data.pdop);
     printf("hdop:%f\n", gps.gsa_data.hdop);
     printf("vdop:%f\n", gps.gsa_data.vdop);
-    // gps.gsa_data.gsaPrn是动态分配的内存，用完记得释放,否则会造成内存泄漏
+    // gps.gsa_data.gsa_prn是动态分配的内存，用完记得释放,否则会造成内存泄漏
     free(gps.gsa_data.gsa_prn);
 #endif
 #if ENABLE_RMC
