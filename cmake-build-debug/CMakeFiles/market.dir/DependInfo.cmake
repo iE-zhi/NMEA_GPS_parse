@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "I:/software/c/market/gps.c" "I:/software/c/market/cmake-build-debug/CMakeFiles/market.dir/gps.c.obj"
-  "I:/software/c/market/main.c" "I:/software/c/market/cmake-build-debug/CMakeFiles/market.dir/main.c.obj"
+  "E:/software/c/NMEA_GPS_parse/gps.c" "E:/software/c/NMEA_GPS_parse/cmake-build-debug/CMakeFiles/market.dir/gps.c.obj"
+  "E:/software/c/NMEA_GPS_parse/main.c" "E:/software/c/NMEA_GPS_parse/cmake-build-debug/CMakeFiles/market.dir/main.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

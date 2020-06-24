@@ -1,4 +1,4 @@
-# Install script for directory: I:/software/c/market
+# Install script for directory: E:/software/c/NMEA_GPS_parse
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "I:/software/c/market/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "E:/software/c/NMEA_GPS_parse/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-I:/software/c/market/gps.c
+E:/software/c/NMEA_GPS_parse/gps.c
 gps.h
-I:/software/c/market/gps.h
+E:/software/c/NMEA_GPS_parse/gps.h
 
-I:/software/c/market/gps.h
+E:/software/c/NMEA_GPS_parse/gps.h
 stdio.h
 -
 stdlib.h
@@ -18,9 +18,9 @@ stdlib.h
 string.h
 -
 
-I:/software/c/market/main.c
+E:/software/c/NMEA_GPS_parse/main.c
 stdio.h
 -
 gps.h
-I:/software/c/market/gps.h
+E:/software/c/NMEA_GPS_parse/gps.h
 
