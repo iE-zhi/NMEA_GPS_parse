@@ -56,6 +56,7 @@ static GGA gga_data_parse(char *gga_data)
     char *p;
     char *end;
     char *s = strdup(gga_data);
+    char *buf = s;
 
     p = strsplit(&s, ",");
     while (p)
@@ -84,7 +85,7 @@ static GGA gga_data_parse(char *gga_data)
                 gga.sats = (unsigned char)strtol(p, NULL, 10);
                 break;
             case 8:   // hdop
-                gga.hdop = (unsigned char)strtol(p, NULL, 10);
+                gga.hdop = strtod(p, NULL);
                 break;
             case 9:   // alt
                 gga.alt = strtof(p, NULL);
@@ -96,11 +97,9 @@ static GGA gga_data_parse(char *gga_data)
                 gga.age = (unsigned char)strtol(p, NULL, 10);
                 break;
             case 14:  // stn_ID
-                end = (char *)malloc(sizeof(p));
-                strncpy(end, p, strlen(p)-3);
-                end[strlen(p)-3] = '\0';
-                gga.stn_ID = (unsigned short )strtol(end, NULL, 10);
-                free(end);
+                end = strchr(p, '*');
+                if (end) *end = '\0';
+                gga.stn_ID = (unsigned short)strtol(p, NULL, 10);
                 break;
             default:
                 break;
@@ -108,7 +107,7 @@ static GGA gga_data_parse(char *gga_data)
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
     return gga;
 }
 #endif
@@ -121,6 +120,7 @@ static GLL gll_data_parse(char *gll_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(gll_data);
+    char *buf = s;
 
     p = strsplit(&s, ",");
     while (p)
@@ -151,7 +151,7 @@ static GLL gll_data_parse(char *gll_data)
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
     return gll;
 }
 #endif
@@ -181,6 +181,7 @@ static GSA_PRN *get_prn_data(char *gps_data)
         {
             sentences_index++;
             s = strdup(sentences);
+            char *buf = s;
             p = strsplit(&s, ",");
             while (p)
             {
@@ -189,6 +190,7 @@ static GSA_PRN *get_prn_data(char *gps_data)
                     for (i=0; i<12; i++)
                     {
                         p = strsplit(&s, ",");
+                        if (!p) break;
                         (gsa_prn+i+(sentences_index-1)*12)->total = (unsigned char)gsa_count * 12;
                         (gsa_prn+i+(sentences_index-1)*12)->prn_ID = i + (sentences_index - 1) * 12;
                         (gsa_prn+i+(sentences_index-1)*12)->prn = (unsigned char)strtol(p, NULL, 10);
@@ -197,11 +199,11 @@ static GSA_PRN *get_prn_data(char *gps_data)
                 p = strsplit(&s, ",");
                 times++;
             }
+            free(buf);
             times = 0;
         }
         sentences = strtok(NULL, "\r\n");
     }
-    free(s);
     return gsa_prn;
 }
 
@@ -213,6 +215,7 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
     char *p;
     char *end;
     char *s = strdup(gsa_data);
+    char *buf = s;
     char *alldata = strdup(gpsdata);
 
     p = strsplit(&s, ",");
@@ -236,18 +239,17 @@ static GSA gsa_data_parse(char *gsa_data, char *gpsdata)
                 gsa.hdop = strtod(p, NULL);
                 break;
             case 17:  // vdop
-                end = (char *)malloc(sizeof(p));
-                strncpy(end, p, strlen(p)-3);
-                end[strlen(p)-3] = '\0';
-                gsa.vdop = strtod(end, NULL);
-                free(end);
+                end = strchr(p, '*');
+                if (end) *end = '\0';
+                gsa.vdop = strtod(p, NULL);
             default:
                 break;
         }
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
+    free(alldata);
     return gsa;
 }
 #endif
@@ -260,6 +262,7 @@ static RMC rmc_data_parse(char *rmc_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(rmc_data);
+    char *buf = s;
 
     p = strsplit(&s, ",");
     while (p)
@@ -308,7 +311,7 @@ static RMC rmc_data_parse(char *rmc_data)
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
     return rmc;
 }
 #endif
@@ -321,6 +324,7 @@ static VTG vtg_data_parse(char *vtg_data)
     unsigned char times = 0;
     char *p;
     char *s = strdup(vtg_data);
+    char *buf = s;
 
     p = strsplit(&s, ",");
     while (p)
@@ -345,7 +349,7 @@ static VTG vtg_data_parse(char *vtg_data)
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
     return vtg;
 }
 #endif
@@ -377,6 +381,7 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
         if (strstr(sentences, prefix))
         {
             s = strdup(sentences);
+            char *buf = s;
             p = strsplit(&s, ",");
             while (p)
             {
@@ -393,12 +398,16 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
                         for (i = 0; i < for_times; i++)
                         {
                             p = strsplit(&s, ",");
+                            if (!p) break;
                             (sats_info+(msg-1)*4+i)->prn = (unsigned char) strtol(p, NULL, 10);
                             p = strsplit(&s, ",");
+                            if (!p) break;
                             (sats_info+(msg-1)*4+i)->elev = (unsigned char) strtol(p, NULL, 10);
                             p = strsplit(&s, ",");
+                            if (!p) break;
                             (sats_info+(msg-1)*4+i)->azimuth = (unsigned short) strtol(p, NULL, 10);
                             p = strsplit(&s, ",");
+                            if (!p) break;
                             (sats_info+(msg-1)*4+i)->SNR = (unsigned char) strtol(p, NULL, 10);
                         }
                         break;
@@ -408,11 +417,11 @@ static SAT_INFO *get_sats_info(char *gps_data, unsigned char sats, char *prefix)
                 p = strsplit(&s, ",");
                 times++;
             }
+            free(buf);
             times = 0;
         }
         sentences = strtok(NULL, "\r\n");
     }
-    free(s);
     return sats_info;
 }
 
@@ -423,6 +432,7 @@ static GSV gsv_data_parse(char *gsv_data, char *gps_data, char *prefix)
     unsigned char times = 0;
     char *p;
     char *s = strdup(gsv_data);
+    char *buf = s;
     char *src_data = strdup(gps_data);
 
     p = strsplit(&s, ",");
@@ -446,7 +456,8 @@ static GSV gsv_data_parse(char *gsv_data, char *gps_data, char *prefix)
         p = strsplit(&s, ",");
         times++;
     }
-    free(s);
+    free(buf);
+    free(src_data);
     return gsv;
 }
 #endif
@@ -478,41 +489,47 @@ GPS gps_data_parse(char* gps_src)
 {
     GPS gps_all;
     char *str_buffer = strdup(gps_src);
+    char *gps_copy;
 
     // GGA数据解析
 #if ENABLE_GGA
     GGA default_gga_data = {"\0",0.0,'N',0.0,'S',0,0,0,0,0,0,0};
-    gps_src = strdup(str_buffer);
-    gps_all.gga_data = strstr(gps_src, PRE_GGA) ? gga_data_parse(strtok(strstr(gps_src, PRE_GGA), "\r\n")) : default_gga_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.gga_data = strstr(gps_copy, PRE_GGA) ? gga_data_parse(strtok(strstr(gps_copy, PRE_GGA), "\r\n")) : default_gga_data;
+    free(gps_copy);
 #endif
 
     // GLL数据解析
 #if ENABLE_GLL
     GLL default_gll_data = {0.0,'\0',0.0,'\0',"\0",'\0'};
-    gps_src = strdup(str_buffer);
-    gps_all.gll_data = strstr(gps_src, PRE_GLL) ? gll_data_parse(strtok(strstr(gps_src, PRE_GLL), "\r\n")) : default_gll_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.gll_data = strstr(gps_copy, PRE_GLL) ? gll_data_parse(strtok(strstr(gps_copy, PRE_GLL), "\r\n")) : default_gll_data;
+    free(gps_copy);
 #endif
 
     // GSA数据解析
 #if ENABLE_GSA
     GSA_PRN default_gsa_prn_data = {0,0,0};
     GSA default_gsa_data = {'\0','\0',0.0,0.0,0.0,&default_gsa_prn_data};
-    gps_src = strdup(str_buffer);
-    gps_all.gsa_data = strstr(gps_src, PRE_GSA) ? gsa_data_parse(strtok(strstr(gps_src, PRE_GSA), "\r\n"), str_buffer) : default_gsa_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.gsa_data = strstr(gps_copy, PRE_GSA) ? gsa_data_parse(strtok(strstr(gps_copy, PRE_GSA), "\r\n"), str_buffer) : default_gsa_data;
+    free(gps_copy);
 #endif
 
     // RMC数据解析
 #if ENABLE_RMC
     RMC default_rmc_data = {"\0",'\0',0.0,'\0',0.0,'\0',0.0,0.0,"\0",0.0,'\0','\0'};
-    gps_src = strdup(str_buffer);
-    gps_all.rmc_data = strstr(gps_src, PRE_RMC) ? rmc_data_parse(strtok(strstr(gps_src, PRE_RMC), "\r\n")) : default_rmc_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.rmc_data = strstr(gps_copy, PRE_RMC) ? rmc_data_parse(strtok(strstr(gps_copy, PRE_RMC), "\r\n")) : default_rmc_data;
+    free(gps_copy);
 #endif
 
     // VTG数据解析
 #if ENABLE_VTG
     VTG default_vtg_data = {0.0,0.0,0.0,0.0};
-    gps_src = strdup(str_buffer);
-    gps_all.vtg_data = strstr(gps_src, PRE_VTG) ? vtg_data_parse(strtok(strstr(gps_src, PRE_VTG), "\r\n")) : default_vtg_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.vtg_data = strstr(gps_copy, PRE_VTG) ? vtg_data_parse(strtok(strstr(gps_copy, PRE_VTG), "\r\n")) : default_vtg_data;
+    free(gps_copy);
 #endif
 
     // GSV数据解析
@@ -520,14 +537,17 @@ GPS gps_data_parse(char* gps_src)
     SAT_INFO default_sat_info_data = {0,0,0,0};
     GSV default_gsv_data = {0,0,0,&default_sat_info_data};
     // GPGSV数据段解析
-    gps_src = strdup(str_buffer);
-    gps_all.gpgsv_data = strstr(gps_src, PRE_GPGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GPGSV), "\r\n"), str_buffer, PRE_GPGSV) : default_gsv_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.gpgsv_data = strstr(gps_copy, PRE_GPGSV) ? gsv_data_parse(strtok(strstr(gps_copy, PRE_GPGSV), "\r\n"), str_buffer, PRE_GPGSV) : default_gsv_data;
+    free(gps_copy);
     // GNGSV数据段解析
-    gps_src = strdup(str_buffer);
-    gps_all.gngsv_data = strstr(gps_src, PRE_GNGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GNGSV), "\r\n"), str_buffer, PRE_GNGSV) : default_gsv_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.gngsv_data = strstr(gps_copy, PRE_GNGSV) ? gsv_data_parse(strtok(strstr(gps_copy, PRE_GNGSV), "\r\n"), str_buffer, PRE_GNGSV) : default_gsv_data;
+    free(gps_copy);
     // GLGSV数据段解析
-    gps_src = strdup(str_buffer);
-    gps_all.glgsv_data = strstr(gps_src, PRE_GLGSV) ? gsv_data_parse(strtok(strstr(gps_src, PRE_GLGSV), "\r\n"), str_buffer, PRE_GLGSV) : default_gsv_data;
+    gps_copy = strdup(str_buffer);
+    gps_all.glgsv_data = strstr(gps_copy, PRE_GLGSV) ? gsv_data_parse(strtok(strstr(gps_copy, PRE_GLGSV), "\r\n"), str_buffer, PRE_GLGSV) : default_gsv_data;
+    free(gps_copy);
 #endif
 
     // UTC数据解析，UTC数据取自RMC段数据
@@ -536,6 +556,5 @@ GPS gps_data_parse(char* gps_src)
 #endif
 
     free(str_buffer);
-    free(gps_src);
     return gps_all;
 }
